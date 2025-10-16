@@ -41,7 +41,7 @@ class Tablero{
     }
 
     /**
-     * Funcion para probar si el tablero se ha rellenado bien
+     * Funcion para probar si el tablero se ha rellenado bien imprimiendotelo
      */
     public function imprimirTablero(){
         for ($i = 0; $i< $this->filas; $i++){
