@@ -12,6 +12,11 @@
     <title>Menu_LightsOut</title>
 </head>
 <body>
-    
+    <?php
+        include_once "Tablero.php";
+
+        $tab = new Tablero(4, 4);
+        $tab->imprimirTablero();
+    ?>
 </body>
 </html>
