@@ -1,5 +1,17 @@
 <?php
-    //TODO Hacerme todo el php para enviarme el formulario e ir a juego.php
+    session_start();
+
+    if ($_SERVER["REQUEST_METHOD"] === "POST"){
+        if (isset($_POST["jugar"])){
+            include_once "Tablero.php";
+            $tablero = new Tablero ((int)($_POST["fila"]), (int)($_POST["columna"]));
+            $_SESSION["tablero"] =  serialize($tablero); //Lo serializo para que me guarde el tipo de objeto 
+            header("location: juego.php");
+        }
+        else if (isset($_POST["instrucciones"])){
+            header("location: instrucciones.php");
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -19,9 +31,18 @@
 
     <div class="container">
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-            <button type="submit"class="" name="jugar">Comenzar juego</button>
-            <button class="" name="instrucciones">Instrucciones</button>
+            <label for="fila">Numero de casillas verticales</label>
+            <input type="number" name="fila" required>
+
+            <label for="columna">Numero de casillas horizontales</label>
+            <input type="number" name="columna" required>
+            <br/>
+            <button class="" name="jugar">Comenzar juego</button>
             <!--Hacerme un selector de filas y columnas con un input number/text como ya vea, ponerle required -->
+        </form>
+
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+            <button class="" name="instrucciones">Instrucciones</button>
         </form>
     </div>
 </body>

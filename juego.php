@@ -4,6 +4,14 @@
     //!Importante La sesion no puede tener nada arriba el codigo php, tiene que estar en la primera linea
 ?>
 <?php 
+    if ($_SERVER["REQUEST_METHOD"] == "POST"){
+        //TODO Mirar si te lo reconoce asi
+        if (isset($_POST["celda"])){
+            $valores = explode(";", $_POST["celda"]);
+            require_once "Tablero.php";
+            $objetoTablero = unserialize($_SESSION["tablero"]);
+        }
+    }
     //Codigo para cambiar el color
 ?>
 
@@ -26,10 +34,10 @@
             //Me traigo el archivo tablero
             require_once "Tablero.php";
 
-            //TODO Hacer el codigo de la sesion para recibir la columna y las filas con una sesion y meterlas en el objeto tablero
-            
-            //Para probr me hago el objeto tablero a mano y ya despues los sacare con una sesion
-            $tablero = new Tablero(4,4);
+            //Saco la sesion y la paso a un objeto
+            //Hay que pasar el objeto al objeto tablero usando unserialize y serialize pq te lo de como objeto generico
+            $tablero = unserialize($_SESSION["tablero"]);
+
             imprimirJuego($tablero);
         ?>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
@@ -46,13 +54,15 @@
                             for ($j = 0; $j < $colum; $j++){
                                 $color = ($miArray[$i][$j] == 1) ? "#fcfcfc" : "#e9f23a";
                                 echo '<td style="background-color: ' . $color . ';">';
-                                echo '<button type="submit" name="celda" style="background-color:' . $color . ';"  "width:100%; height:100%; margin:0; padding:0;>hola</button></td>';
+                                echo '<button type="submit" name="celda" value="'. $i . ";" . $j . '" style="background-color:' . $color . ';"  "width:100%; height:100%; margin:0; padding:0;></button></td>';
                             }
-                            echo "</tr>";
+                            echo "</tr></br>";
                         }
                     }
                 ?>
             </table>
+
+            <button name ="resetear" class="">Reiniciar</button>
         </form>
     </div>
 </body>

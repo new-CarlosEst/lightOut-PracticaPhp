@@ -55,15 +55,38 @@ class Tablero{
     /**
      * Recibe $x que es la fila y $y que es la columna y te la apaga (Apagado = 0)
      */
-    public function apagar($x, $y){
+    private function apagar($x, $y){
         $this->array[$x][$y] = 0;
     }
 
     /**
      * Recibe $x que es la fila y $y que es la columna y te lo enciende (Encendido = 0)
      */
-    public function encender($x, $y){
+    private function encender($x, $y){
         $this->array[$x][$y] = 1;
+    }
+
+    public function posicionTocada ($x , $y){
+        //recorro vertical
+        for ($i = $x -1; $i< $x+2; $i++){
+            if ($this->array[$i][$y] == 0){
+                $this->encender($i, $y);
+            }
+            else {
+                $this->apagar($i, $y);
+
+            }
+        }
+
+        //Recorro horizontal
+        for ($i = $y -1; $i< $y+2; $i++){
+            if ($this->array[$x][$i] == 0){
+                $this->encender($x, $i);
+            }
+            else {
+                $this->apagar($x, $i);
+            }
+        }
     }
 }
 ?>
