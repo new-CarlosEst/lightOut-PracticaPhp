@@ -26,7 +26,7 @@
     <title>pantalla-juego</title>
 </head>
 <body>
-    <header>Lights Out</header>
+    <header<h1>Lights Out</h1></header>
     
     <div class="container">
         
