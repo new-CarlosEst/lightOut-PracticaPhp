@@ -78,7 +78,7 @@ class Tablero{
     }
 
     /**
-     * Funcion que te cambia si esta encendida o apagada una fila
+     * Funcion que te comprueba las celdas de arriba, abajo, derecha e izquierda y te las apaga/enciende
      */
     public function posicionTocada ($x , $y){
         //!Tengo que contorlar que no este en las esquinas ya que si no el array me saldra
@@ -89,7 +89,7 @@ class Tablero{
         for ($i = $x -1; $i< $x+2; $i++){
             //Compruebo que no se salga de los limites 
             if ($i >= 0 && $i < ($this->filas-1)){
-                if ($this->array[$i][$y] == 0){ //Comrpuebo si esa encendida o apagada
+                if ($this->array[$i][$y] == 0){ //Compruebo si esa encendida o apagada
                     $this->encender($i, $y);
                 }
                 else {

@@ -11,7 +11,12 @@
             require_once "Tablero.php";
             $objetoTablero = unserialize($_SESSION["tablero"]);
             $objetoTablero->posicionTocada((int)$valores[0], (int)$valores[1]);
+            $objetoTablero->imprimirTablero(); //!mirar si funciona
         }
+        else if (isset($_POST["menu"])){
+            header("location: menu.php");
+        }
+        // else if (isset($_POST(["menu"])));
     }
 ?>
 
@@ -42,6 +47,7 @@
                 $tablero->imprimirTablero();
             ?>
             <button name ="resetear" class="">Reiniciar</button>
+            <button name ="menu" class="">Volver al menu</button>
         </form>
     </div>
 </body>
