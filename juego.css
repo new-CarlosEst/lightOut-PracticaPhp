@@ -20,3 +20,8 @@ body{
 table {
     border: 20px;
 }
+
+a{
+    text-decoration: none;
+    color: black;
+}

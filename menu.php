@@ -31,10 +31,10 @@
     <div class="container">
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
             <label for="fila">Numero de casillas verticales</label>
-            <input type="number" name="fila" required>
+            <input type="number" name="fila" required min="3" max = "8">
 
             <label for="columna">Numero de casillas horizontales</label>
-            <input type="number" name="columna" required>
+            <input type="number" name="columna" required min="3" max = "8">
             <br/>
             <button type="submit" class="" name="jugar">Comenzar juego</button>
             <!--Hacerme un selector de filas y columnas con un input number/text como ya vea, ponerle required -->

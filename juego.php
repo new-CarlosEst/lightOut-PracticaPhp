@@ -4,19 +4,29 @@
     //!Importante La sesion no puede tener nada arriba el codigo php, tiene que estar en la primera linea
 ?>
 <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST"){
-        //TODO Mirar si te lo reconoce asi
-        if (isset($_POST["celda"])){
-            $valores = explode(";", $_POST["celda"]);
-            require_once "Tablero.php";
-            $objetoTablero = unserialize($_SESSION["tablero"]);
-            $objetoTablero->posicionTocada((int)$valores[0], (int)$valores[1]);
-            $objetoTablero->imprimirTablero(); //!mirar si funciona
+    
+    /**
+     * funcion que imprime el tablero y te compruea si ha tocado los botones
+     */
+    function comprobar(){
+        require_once "Tablero.php";
+        $objetoTablero = unserialize($_SESSION["tablero"]);
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST"){
+            //TODO Mirar si te lo reconoce asi
+            if (isset($_POST["celda"])){
+                $valores = explode(";", $_POST["celda"]);
+                $objetoTablero->posicionTocada((int)$valores[0], (int)$valores[1]);
+            }
+            else if (isset($_POST["res"])){
+                $objetoTablero->reiniciar();
+            }
+            //Compruebo si he ganado
+            if($objetoTablero->ganar() === 0){
+                echo "<script>window.location.href = 'otra_pagina.php';</script>"; //Me envio con js ya que con header da error
+            }
         }
-        else if (isset($_POST["menu"])){
-            header("location: menu.php");
-        }
-        // else if (isset($_POST(["menu"])));
+        $objetoTablero->imprimirTablero();
     }
 ?>
 
@@ -31,9 +41,8 @@
     <title>pantalla-juego</title>
 </head>
 <body>
-    <header <h1>Lights Out</h1> </header>
-
     <div class="container">
+        <header <h1>Lights Out</h1> </header></br>
 
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
             <?php
@@ -43,12 +52,12 @@
                 //Saco la sesion y la paso a un objeto
                 //Hay que pasar el objeto al objeto tablero usando unserialize y serialize pq te lo de como objeto generico
                 $tablero = unserialize($_SESSION["tablero"]);
-                // $tablero = new Tablero(5,5);
-                $tablero->imprimirTablero();
+                comprobar();
             ?>
-            <button name ="resetear" class="">Reiniciar</button>
-            <button name ="menu" class="">Volver al menu</button>
+            <button class="">Reiniciar</button>
+            
         </form>
+        <button name ="menu" class=""><a href="menu.php">Volver al menu</a></button>
     </div>
 </body>
 </html>

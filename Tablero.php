@@ -112,5 +112,27 @@ class Tablero{
             }
         }
     }
+
+    /**
+     * Funcion que comprueba si he ganado, devuelve el numero de luces encendidas
+     */
+    public function ganar(){
+        $contador = 0;
+        for ($i = 0; $i< $this->filas; $i++){
+            for ($j = 0; $j < $this->columnas; $j++){
+                if ($this->array[$i][$j] == 1){
+                    $contador++;
+                }
+            }
+        }
+        return $contador;
+    }
+
+    /**
+     * Reinicio el tablero
+     */
+    public function reiniciar(){
+        $this->array = $this->inicializarTablero();
+    }
 }
 ?>
