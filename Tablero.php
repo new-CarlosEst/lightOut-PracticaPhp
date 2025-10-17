@@ -41,15 +41,26 @@ class Tablero{
     }
 
     /**
-     * Funcion para probar si el tablero se ha rellenado bien imprimiendotelo
+     * Funcion para imrimir el tablero
      */
     public function imprimirTablero(){
-        for ($i = 0; $i< $this->filas; $i++){
-            for ($j = 0; $j < $this->columnas; $j++){
-                echo $this->array[$i][$j] . " ";
+        //Imprimo el tablero aqui pq si lo imprimo en juego por alguna razon no me funciona la tabla
+        echo '<table border="1" style="border-collapse: collapse;">';
+        //Saco el array
+        $fil = $this->getFilas();
+        $colum = $this->getColumnas();
+        $miArray = $this->getArray();
+        //TODO Se me imprime la tabla en una misma fila todas las celdas arreglarlo
+        for ($i = 0; $i< $fil ; $i++){
+            echo "<tr>";
+            for ($j = 0; $j < $colum; $j++){
+                $color = ($miArray[$i][$j] == 1) ? "#fcfcfc" : "#e9f23a";
+                echo '<td>';
+                echo '<button type="submit" name="celda" value="'. $i . ";" . $j . '" style="background-color:' . $color . ';"  "width:100%; height:100%; margin:0; padding:0;></button></td>';
             }
-            echo "<br/>";
+            echo "</tr>";
         }
+        echo "</table>";
     }
 
     /**
