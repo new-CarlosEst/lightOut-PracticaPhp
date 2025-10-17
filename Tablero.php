@@ -81,10 +81,6 @@ class Tablero{
      * Funcion que te comprueba las celdas de arriba, abajo, derecha e izquierda y te las apaga/enciende
      */
     public function posicionTocada ($x , $y){
-        //!Tengo que contorlar que no este en las esquinas ya que si no el array me saldra
-        
-        
-
         //recorro vertical
         for ($i = $x -1; $i< $x+2; $i++){
             //Compruebo que no se salga de los limites 

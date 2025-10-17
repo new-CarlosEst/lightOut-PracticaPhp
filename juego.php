@@ -13,17 +13,17 @@
         $objetoTablero = unserialize($_SESSION["tablero"]);
 
         if ($_SERVER["REQUEST_METHOD"] == "POST"){
-            //TODO Mirar si te lo reconoce asi
             if (isset($_POST["celda"])){
                 $valores = explode(";", $_POST["celda"]);
                 $objetoTablero->posicionTocada((int)$valores[0], (int)$valores[1]);
             }
+            //TODO Arreglar el boton de reiniciar
             else if (isset($_POST["res"])){
                 $objetoTablero->reiniciar();
             }
             //Compruebo si he ganado
             if($objetoTablero->ganar() === 0){
-                echo "<script>window.location.href = 'otra_pagina.php';</script>"; //Me envio con js ya que con header da error
+                echo "<script>window.location.href = 'menu.php';</script>"; //Me envio con js ya que con header da error
             }
         }
         $objetoTablero->imprimirTablero();
