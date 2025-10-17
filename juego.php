@@ -10,7 +10,6 @@
             $valores = explode(";", $_POST["celda"]);
             require_once "Tablero.php";
             $objetoTablero = unserialize($_SESSION["tablero"]);
-            echo $valores[0];
             $objetoTablero->posicionTocada((int)$valores[0], (int)$valores[1]);
         }
     }

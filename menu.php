@@ -36,7 +36,7 @@
             <label for="columna">Numero de casillas horizontales</label>
             <input type="number" name="columna" required>
             <br/>
-            <button class="" name="jugar">Comenzar juego</button>
+            <button type="submit" class="" name="jugar">Comenzar juego</button>
             <!--Hacerme un selector de filas y columnas con un input number/text como ya vea, ponerle required -->
         </form>
 

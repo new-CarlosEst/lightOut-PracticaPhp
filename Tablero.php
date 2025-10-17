@@ -56,7 +56,7 @@ class Tablero{
             for ($j = 0; $j < $colum; $j++){
                 $color = ($miArray[$i][$j] == 1) ? "#fcfcfc" : "#e9f23a";
                 echo '<td>';
-                echo '<button type="submit" name="celda" value="'. $i . ";" . $j . '" style="background-color:' . $color . ';"  "width:100%; height:100%; margin:0; padding:0;></button></td>';
+                echo '<button class="celda" type="submit" name="celda" value="'. $i . ";" . $j . '" style="background-color:' . $color . ';"></button></td>';
             }
             echo "</tr>";
         }
@@ -77,25 +77,38 @@ class Tablero{
         $this->array[$x][$y] = 1;
     }
 
+    /**
+     * Funcion que te cambia si esta encendida o apagada una fila
+     */
     public function posicionTocada ($x , $y){
+        //!Tengo que contorlar que no este en las esquinas ya que si no el array me saldra
+        
+        
+
         //recorro vertical
         for ($i = $x -1; $i< $x+2; $i++){
-            if ($this->array[$i][$y] == 0){
-                $this->encender($i, $y);
+            //Compruebo que no se salga de los limites 
+            if ($i >= 0 && $i < ($this->filas-1)){
+                if ($this->array[$i][$y] == 0){ //Comrpuebo si esa encendida o apagada
+                    $this->encender($i, $y);
+                }
+                else {
+                    $this->apagar($i, $y);
+                }
             }
-            else {
-                $this->apagar($i, $y);
-
-            }
+            
         }
 
         //Recorro horizontal
         for ($i = $y -1; $i< $y+2; $i++){
-            if ($this->array[$x][$i] == 0){
-                $this->encender($x, $i);
-            }
-            else {
-                $this->apagar($x, $i);
+            //Hago lo mismo, compruebo que no se salga de los limites
+            if ($i >= 0 && $i < ($this->columnas-1)){
+                if ($this->array[$x][$i] == 0){
+                    $this->encender($x, $i);
+                }
+                else {
+                    $this->apagar($x, $i);
+                }
             }
         }
     }
